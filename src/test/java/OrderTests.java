@@ -1,20 +1,14 @@
-import Pages.MainPage;
-import Pages.OrderPage;
-import Pages.RentInfoPage;
-import org.junit.After;
-import org.junit.Before;
+import pages.MainPage;
+import pages.OrderPage;
+import pages.RentInfoPage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
-public class OrderTests {
-
-    private static final String BROWSER_NAME = "CHROME";
-    private WebDriver driver;
+public class OrderTests extends WebDriverSet {
 
     String caseButton;
     String nameInput;
@@ -22,12 +16,6 @@ public class OrderTests {
     String addressInput;
     String stationInput;
     String phoneInput;
-
-    @Before
-    public void prepareDriver() {
-        driver = WebDriverSet.createDriver(BROWSER_NAME);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-    }
 
     public OrderTests (String caseButton, String nameInput, String surnameInput, String addressInput, String stationInput, String phoneInput) {
         this.caseButton = caseButton;
@@ -60,8 +48,4 @@ public class OrderTests {
         assertTrue(rentInfoPage.checkOrderWindowIsDisplayed());
     }
 
-    @After
-    public void quitDriver() {
-        driver.quit();
-    }
 }

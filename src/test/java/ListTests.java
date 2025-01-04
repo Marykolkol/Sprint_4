@@ -1,28 +1,16 @@
-import Pages.MainPage;
-import org.junit.After;
-import org.junit.Before;
+import pages.MainPage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class ListTests {
-
-    private static final String BROWSER_NAME = "CHROME";
-    private WebDriver driver;
+public class ListTests extends WebDriverSet {
 
     int accordionIndex;
     String expectedQuestion;
     String expectedAnswer;
-
-    @Before
-    public void prepareDriver() {
-        driver = WebDriverSet.createDriver(BROWSER_NAME);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-    }
 
     public ListTests(int accordionIndex, String expectedQuestion, String expectedAnswer) {
         this.accordionIndex = accordionIndex;
@@ -58,10 +46,5 @@ public class ListTests {
         mainPage.clickCookieButton();
         String actualAnswer = mainPage.getAccordionText(accordionIndex);
         assertEquals("Текст выпадающего элемента не соответствует ожидаемому", expectedAnswer, actualAnswer);
-    }
-
-    @After
-    public void quitDriver() {
-        driver.quit();
     }
 }
